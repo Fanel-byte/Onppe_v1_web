@@ -5,10 +5,13 @@ import Details from './pages/details';
 
 const App = () => {
   return (
+   
     <Template>
       {/* Content goes here */}
+     
      <Details/>
     </Template>
+
   );
 };
 

@@ -4,12 +4,13 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
-      fontFamily: {
+    /* fontFamily: {
         'mons': ['Montserrat', 'sans-serif']
-      },
+      },*/
       colors: {
         CustomGreen: '#59C55E',
       },
+
     },
     colors: {
       transparent: 'transparent',
@@ -25,8 +26,13 @@ module.exports = {
       purple: colors.violet,
       pink: colors.pink,
       green:colors.green,
+      orange:colors.orange,
     },
   },
-  variants: {},
+  variants: {
+    variants: {
+      fill: ['hover', 'focus'], // this line does the trick
+    },
+  },
   plugins: [],
 };

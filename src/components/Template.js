@@ -6,7 +6,7 @@ const Template = ({ children }) => {
   return (
     <div className="flex h-screen flex-row-reverse">
       {/* Side Menu */}
-      <div className="w-1/5"> <Navbar/></div>
+      <div className="w-1/6"> <Navbar/></div>
       
       {/* Content */}
       <div className="flex-1 overflow-y-auto">
