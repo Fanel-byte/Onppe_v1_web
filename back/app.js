@@ -13,6 +13,7 @@ const piecejointeVocaleRoutes = require('./routes/piecejointeVocaleRoutes');
 
 
 
+
 // Import des fichiers de configuration
 const db = require('./utils/db');
 
@@ -33,7 +34,6 @@ app.use('/citoyen', citoyenRoutes);
 app.use('/images', piecejointeImgRoutes);
 app.use('/videos', piecejointeVideoRoutes);
 app.use('/vocaux', piecejointeVocaleRoutes);
-
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {

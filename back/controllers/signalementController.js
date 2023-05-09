@@ -15,7 +15,7 @@ exports.getAllSignalements = (req, res) => {
 // Récupérer un signalement par son ID
 exports.getSignalementById = (req, res) => {
   const signalementId = req.params.id;
-  db.query("SELECT * FROM signalement s LEFT JOIN signalementmotif m ON s.motifid = m.code LEFT JOIN typesignaleur t ON s.typesignaleurid = t.id WHERE s.id = $1",
+  db.query("SELECT * FROM signalement s LEFT JOIN signalementmotif m ON s.motifid = m.code LEFT JOIN typesignaleur t ON s.typesignaleurid = t.id LEFT JOIN enfant e ON s.enfantid = e.id WHERE s.id = $1", 
   [signalementId],
   (err, result) => {
     if (err) {

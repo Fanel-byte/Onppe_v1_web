@@ -1,18 +1,36 @@
 import React,{useEffect,useState} from 'react';
-import img1 from '../assets/images/img1.png'; 
 import Axios from 'axios';
+import '../Style/details.css';
 
 
 export default function Details() {
     const [signalement,Setsignalement] = useState([])
     
+    //getting signalement informations
     useEffect(() => {
-        Axios.get("http://localhost:4000/signalement/getSignalementById/2").then((response) => {
+        Axios.get("http://localhost:4000/signalement/getSignalementById/2").then((response) => { //once the dashboard is ready instead of 2 in the link it will be changed with a signalement id from the row clicked in the previous page
            Setsignalement(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         
         }); });
-     
+    //getting the child and the wilaya info 
+    const enfantid = signalement.enfantid;
+    const [enfant,Setenfant] = useState([])
+        useEffect(() => {
+            Axios.get('http://localhost:4000/enfants/getEnfantById'+enfantid).then((response) => {
+               Setenfant(response.data);
+            // console.log(response.data);
+            
+            }); });
+     //getting the picture info
+     const [img,Setimg] = useState([])
+     const signalementid = signalement.id;
+     useEffect(() => {
+        Axios.get('http://localhost:4000/images/getImgBySignalementId/2').then((response) => {
+           Setimg(response.data);
+        // console.log(response.data);
+        
+        }); });
     return (
         
         <>
@@ -38,7 +56,7 @@ export default function Details() {
                         <h1 className="font-medium text-2xl"> معلومات عامة</h1>
                         <div class="bg-gradient-to-t from-gray-100/60 to-white rounded-lg p-10 mt-3 shadow-lg">
                             <p className="mb-4 text-lg flex-auto font-medium"><strong>التاريخ: </strong> {new Date(signalement.date).toLocaleDateString()}</p>
-                            <p className="mb-4 text-lg flex-auto font-medium"><strong>اسم الإخطار: </strong>  not in database </p>
+                            <p className="mb-4 text-lg flex-auto font-medium"><strong>نوع الإخطار: </strong>   {signalement.designationar}</p>
                             <p className="mb-4 text-lg flex-auto font-medium"><strong>مبلغ الاخطار : </strong> {signalement.descriptif_signaleur} </p>
                         </div>
                     </div>
@@ -46,14 +64,14 @@ export default function Details() {
                         <h1 className="font-medium text-2xl"> معلومات خاصة بالطفل تحت الخطر</h1>
                         <div className="bg-gradient-to-t from-gray-100/60 to-white rounded-lg p-10 mt-3 shadow-lg flex flex-row">
                         <div className="w-1/2">
-                            <p className="mb-4 text-lg flex-auto font-medium"><strong>الاسم : </strong> هبة</p>
-                            <p className="mb-4 text-lg flex-auto font-medium"><strong>الجنس: </strong> أنثى</p>
-                            <p className="mb-4 text-lg flex-auto font-medium"><strong>الولاية: </strong> الجزائر</p>
+                            <p className="mb-4 text-lg flex-auto font-medium"><strong>الاسم : </strong> {signalement.prenom_ar} </p>
+                            <p className="mb-4 text-lg flex-auto font-medium"><strong>الجنس: </strong> {signalement.sexe} </p>
+                            <p className="mb-4 text-lg flex-auto font-medium"><strong>الولاية: </strong> {enfant.wilaya}</p>
                         </div>
                         <div className="w-1/2 px-2">
-                            <p className="mb-4 text-lg flex-auto font-medium"><strong>اللقب: </strong> لوزاني</p>
-                            <p className="mb-4 text-lg flex-auto font-medium"><strong>العمر: </strong> 13</p>
-                            <p className="mb-4 text-lg flex-auto font-medium "><strong>العنوان: </strong> 44 شارع بلدية برج الكيفان</p>
+                            <p className="mb-4 text-lg flex-auto font-medium"><strong>اللقب: </strong> {signalement.nom_ar} </p>
+                            <p className="mb-4 text-lg flex-auto font-medium"><strong>العمر:  </strong> {signalement.age} </p>
+                            <p className="mb-4 text-lg flex-auto font-medium "><strong>العنوان: {signalement.adresse}</strong> </p>
                         </div>
                         </div>
 
@@ -65,20 +83,8 @@ export default function Details() {
                             <p className="mb-4 text-lg flex-auto font-medium"><strong>التاريخ  : </strong> {new Date(signalement.dateincident).toLocaleDateString()}</p>
                             <p className="mb-4 text-2xl flex-auto font-extrabold">أسباب الخطر </p>
                             <div className="mb-4">
-                                <input type="checkbox" className="float-righ font-medium mx-2 mb-1" id="reason1" />
-                                <label for="reason1">  المساس بحقه في التعليم </label>
-                            </div>
-                            <div className="mb-4">
-                                <input checked type="checkbox" className="float-right mx-2 mb-1  " id="reason2" />
-                                <label for="reason2">  عجز من يقوم برعاية الطفل عن التحكم في تصرفاته  </label>
-                            </div>
-                            <div className="mb-4">
-                                <input type="checkbox" className="float-right mx-2 mb-1" id="reason3" />
-                                <label for="reason3">  تعريض الطفل للإهمال أو التشرد  </label>
-                            </div>
-                            <div className="mb-4">
-                                <input type="checkbox" className="float-right mx-2 mb-1" id="reason4" />
-                                <label for="reason4">  التسول بالطفل أو تعريضه للتسول </label>
+                                <input type="checkbox" className="float-righ font-medium mx-2 mb-1" id="reason1" checked />
+                                <label for="reason1">{signalement.designationar}</label>
                             </div>
                         </div>
 
@@ -110,35 +116,41 @@ export default function Details() {
             </ul>
             </div>
             <div class="flex justify-center space-x-4">
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-                
-            </div>
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
+            <div class="relative group ml-3">
+  <img class="w-full h-full object-cover rounded-lg shadow-md transition-all duration-500 group-hover:brightness-50 group-hover:contrast-125" src={img.path} alt={img.description} />
+  <div class="absolute inset-0 bg-black transition-opacity duration-500 opacity-0 group-hover:opacity-70"></div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-9 text-center text-white transition-all duration-500 opacity-0 group-hover:opacity-100">
+    <h1 class="font-dmserif text-3xl font-bold">{img.id}</h1>
+    <p class="mb-3 text-lg italic">{img.description}</p>
+  </div>
+</div>
+
+<div class="relative group">
+  <img class="w-full h-full object-cover rounded-lg shadow-md transition-all duration-500 group-hover:brightness-50 group-hover:contrast-125" src={img.path} alt={img.description} />
+  <div class="absolute inset-0 bg-black transition-opacity duration-500 opacity-0 group-hover:opacity-70"></div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-9 text-center text-white transition-all duration-500 opacity-0 group-hover:opacity-100">
+    <h1 class="font-dmserif text-3xl font-bold">{img.id}</h1>
+    <p class="mb-3 text-lg italic">{img.description}</p>
+  </div>
+</div>
+<div class="relative group">
+  <img class="w-full h-full object-cover rounded-lg shadow-md transition-all duration-500 group-hover:brightness-50 group-hover:contrast-125" src={img.path} alt={img.description} />
+  <div class="absolute inset-0 bg-black transition-opacity duration-500 opacity-0 group-hover:opacity-70"></div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-9 text-center text-white transition-all duration-500 opacity-0 group-hover:opacity-100">
+    <h1 class="font-dmserif text-3xl font-bold">{img.id}</h1>
+    <p class="mb-3 text-lg italic">{img.description}</p>
+  </div>
+</div>
+<div class="relative group">
+  <img class="w-full h-full object-cover rounded-lg shadow-md transition-all duration-500 group-hover:brightness-50 group-hover:contrast-125" src={img.path} alt={img.description} />
+  <div class="absolute inset-0 bg-black transition-opacity duration-500 opacity-0 group-hover:opacity-70"></div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-9 text-center text-white transition-all duration-500 opacity-0 group-hover:opacity-100">
+    <h1 class="font-dmserif text-3xl font-bold">{img.id}</h1>
+    <p class="mb-3 text-lg italic">{img.description}</p>
+  </div>
+</div>
             </div>
 
-             <div class="flex justify-center space-x-4">
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
-            <div class="p-2 bg-white rounded-lg shadow-md">
-                <img src={img1} alt="img1" />
-            </div>
-            </div>
 
 
 

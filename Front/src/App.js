@@ -1,7 +1,7 @@
 import React from 'react';
 import Template from './components/Template';
 import Details from './pages/details';
-
+import "./App.css";
 function App () {
   return (
     <Template>

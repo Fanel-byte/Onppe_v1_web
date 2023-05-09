@@ -29,7 +29,7 @@ exports.getImgBySignalementId = (req, res) => {
   console.log(err);
   res.status(500).json({ message: "Une erreur s'est produite." });
   } else {
-  res.status(200).json(result.rows);
+  res.status(200).json(result.rows[0]);
   }
   });
   };
