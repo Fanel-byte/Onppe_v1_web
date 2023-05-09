@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl; /* direction de droite à gauche pour l'arabe */
+    text-align: right; /* alignement à droite pour l'arabe */
+    background-color: #f7f7f7;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-family: Montserrat - semibold;
+    font-weight: 600; /* Correspond à la police semi-bold */
+    font-size: 32px;
+    width: 220px;
+    height: 39px;
+    position: absolute;
+    top: 65px;
+    left: 891px;
+}
+
+  
+
+h3 {
+  position: absolute;
+  top: 150px;
+  left: 385px;
+  width: 205px;
+  height: 31px;
+  font-family: 'Montserrat Medium', sans-serif;
+  font-size: 22px;
+}
+
+  
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3e8e41;
+  }
+  
+
+ 
