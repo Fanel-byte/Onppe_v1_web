@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export function Filter({ options, selected, setSelected }) {
   const handleSelectChange = (event) => {
     setSelected(event.target.value);
@@ -15,15 +14,17 @@ export function Filter({ options, selected, setSelected }) {
             name="filter"
             value={selected}
             onChange={handleSelectChange}
-            className="block w-full py-2 pl-3 pr-10 text-base border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md text-right"
+            className="block w-full py-2 pl-3 pr-10 text-base border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md text-right appearance-none"
           >
             {options.map((opt) => (
-              <option value={opt.val}>
+              <option
+                key={opt.val}
+                value={opt.val}
+              >
                 {opt.val}
               </option>
             ))}
           </select>
-        
         </div>
       </div>
     </div>
