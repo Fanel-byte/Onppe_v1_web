@@ -1,16 +1,14 @@
 import React from 'react';
 import Template from './components/Template';
-import Details from './pages/details';
-
+import Main from './pages/main';
 
 const App = () => {
   return (
-   
-    <Template>
-      {/* Content goes here */}
+     <Template >
      
-     <Details/>
+     <Main/>
     </Template>
+   
 
   );
 };

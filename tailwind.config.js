@@ -4,9 +4,9 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
-    /* fontFamily: {
+    fontFamily: {
         'mons': ['Montserrat', 'sans-serif']
-      },*/
+      },
       colors: {
         CustomGreen: '#59C55E',
       },
@@ -34,5 +34,15 @@ module.exports = {
       fill: ['hover', 'focus'], // this line does the trick
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    styled: true,
+    themes: true,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    darkTheme: "white",
+  },
 };

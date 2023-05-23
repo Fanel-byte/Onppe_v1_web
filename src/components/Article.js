@@ -1,0 +1,15 @@
+
+import React from "react";
+import artimg from '../assets/artimg.png';
+function Article() {
+  return (      
+    <div className="card w-80 bg-white shadow-lg rounded-lg">
+    <figure><img src={artimg} alt="Shoes" /></figure>
+    <div className="card-body flex flex-col justify-center items-end text-right">
+        <p className="font-regular text-right text-sm leading-6 text-orange-500"> نشاطات</p>
+      <h2 className="card-title font-medium text-black">الجلسات الوطنية حول واقع الطفولة في الجزائر – "إنجازات و رهانات”</h2>
+    </div>
+  </div>
+  )
+}
+export default Article;
