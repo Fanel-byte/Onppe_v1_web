@@ -1,4 +1,6 @@
 const db = require('../utils/db');
+const bodyParser = require('body-parser');
+const cors =require('cors');
 
 // Récupérer tous les signalements
 exports.getAllSignalements = (req, res) => {
@@ -28,13 +30,22 @@ exports.getSignalementById = (req, res) => {
     }
   });
 };
-
 // Créer un nouveau signalement
 exports.createSignalement = (req, res) => {
-  const { id , citoyenid, motifid, enfantid  ,  descriptif, preuveid , typesignaleurid , identitesecrete} = req.body;
-  db.query("INSERT INTO signalement (citoyenid, motifid, enfantid  ,  descriptif, preuveid , typesignaleurid, identitesecrete , date , heure) VALUES ($1, $2, $3, $4 , $5 ,$6 , $7 , NOW() , NOW()) RETURNING id",
-    [citoyenid, motifid, enfantid  ,  descriptif, preuveid , typesignaleurid, identitesecrete ],
+  const id =  req.body.id;
+  const citoyenid =  req.body.citoyenid
+  const motifid =  req.body.motifid
+  const enfantid =  req.body.enfantid
+  const descriptif =  req.body.descriptif
+  const preuveid =  req.body.preuveid
+  const typesignaleurid =  req.body.typesignaleurid
+  const identitesecrete =  req.body.identitesecrete
+  const dateincident = req.body.dateincident
+  // const { id , citoyenid, motifid, enfantid  ,  descriptif, preuveid , typesignaleurid , identitesecrete} = req.body;
+  db.query("INSERT INTO signalement (citoyenid, motifid, enfantid  ,  descriptif, preuveid , typesignaleurid, identitesecrete, dateincident , date , heure) VALUES ($1, $2, $3, $4 , $5 ,$6 , $7 , $8 , NOW() , NOW()) RETURNING id",
+    [citoyenid, motifid, enfantid  ,  descriptif, preuveid , typesignaleurid, identitesecrete, dateincident ],
     (err, result) => {
+      console.log(err)
       if (err) {
         console.log(err);
         res.status(500).json({ message: "Une erreur s'est produite." });

@@ -14,6 +14,7 @@ const piecejointeVocaleRoutes = require('./routes/piecejointeVocaleRoutes');
 
 
 
+
 // Import des fichiers de configuration
 const db = require('./utils/db');
 
@@ -26,6 +27,7 @@ app.use(cors());
 app.use(express.static('./public/images')) ;
 app.use(express.static('./public/videos')) ;
 app.use(express.static('./public/vocaux')) ;
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configuration des routes
 app.use('/enfants', enfantRoutes);

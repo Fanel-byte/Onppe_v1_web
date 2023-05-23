@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import Axios from 'axios';
 import '../Style/details.css';
-import Flowbite from 'flowbite';
 import movie from '../assets/video/movie.mp4';
 import audio from '../assets/audio/audio.mp3';
 

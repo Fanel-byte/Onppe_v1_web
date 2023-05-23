@@ -29,6 +29,7 @@ res.status(200).json(result.rows[0]);
 
 // Ajouter un enfant
 exports.createEnfant = (req, res) => {
+    
     var query="INSERT INTO enfant (nom, prenom, age, sexe ,situationparent, adresse , wilayacode) VALUES ($1, $2, $3, $4 , $5 , $6 , $7) RETURNING id";
     db.query(query, [req.body.nom, req.body.prenom, req.body.age, req.body.sexe , req.body.situationparent ,req.body.adresse , req.body.wilayacode] , (err, result) => {
         if (err) {
