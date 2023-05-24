@@ -1,3 +1,6 @@
+
+
+
 export const signalement = [
     {
         "id": 0,
@@ -912,3 +915,50 @@ export const signalement = [
 ];
 
 export default signalement;
+
+
+
+{/*const axios = require('axios');
+const fs = require('fs');
+
+// Function to fetch data from API endpoints and generate the JSON file
+async function generateJSONFile() {
+  try {
+    // Fetch signalements
+    const signalementsResponse = await axios.get('http://localhost:5000/signalement/');
+    const signalements = signalementsResponse.data;
+
+    // Fetch citoyens
+    const citoyensResponse = await axios.get('http://localhost:5000/citoyen/');
+    const citoyens = citoyensResponse.data;
+
+    // Fetch enfants
+    const enfantsResponse = await axios.get('http://localhost:5000/enfant/');
+    const enfants = enfantsResponse.data;
+
+    // Generate JSON data
+    const jsonData = signalements.map((signalement) => {
+      // Find corresponding citoyen and enfant
+      const citoyen = citoyens.find((citoyen) => citoyen.id === signalement.citoyenid);
+      const enfant = enfants.find((enfant) => enfant.id === signalement.enfantid);
+
+      const name = citoyen ? `${citoyen.nom} ${citoyen.prenom}` : 'Anonymous';
+
+      return {
+        id: signalement.id,
+        name: name,
+        age: enfant.age,
+      };
+    });
+
+    // Write JSON data to a file
+    fs.writeFileSync('data.json', JSON.stringify(jsonData, null, 2));
+    console.log('JSON file generated successfully.');
+  } catch (error) {
+    console.error('Error generating JSON file:', error);
+  }
+}
+
+// Call the function to generate the JSON file
+generateJSONFile();
+*/}

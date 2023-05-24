@@ -26,16 +26,33 @@ function Signal() {
         setSelectedDateTo] = useState(null);
     const [nameSearch,
         setNameSearch] = useState('');
+    const [isPopupVisible,
+        setIsPopupVisible] = useState(false);
 
+    const togglePopup = () => {
+        setIsPopupVisible(!isPopupVisible);
+    };
     return (
-        <div className="flex flex-col relative">
+        <div className="flex flex-col touch-action-none overflow-y-hidden overflow-x-hidden overflow-hidden" >
             <div className="text-right">
                 <h1 className="text-2xl font-bold">تحليل التبليغات</h1>
                 <h2 className="text-lg font-bold">التبليغات</h2>
             </div>
 
-            <div className="flex items-center space-x-4">
+            {/* Buttons added at the top */}
+            <div className="flex justify-start space-x-4 mt-4 ml-4">
+                <button
+                    className="bg-red-500 text-white py-2 px-4 rounded"
+                    onClick={togglePopup}>
+                    مسح الاخطار
+                </button>
+                <button className="bg-green-500 text-white py-2 px-4 rounded">
+                    اخطار جديد
+                </button>
 
+            </div>
+
+            <div className="flex items-center space-x-4">
                 <div className="w-full">
                     <Filter options={stateoption} selected={state} setSelected={setState}/>
                 </div>
@@ -77,9 +94,9 @@ function Signal() {
                         className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                         <Icon icon={searchIcon} className="text-gray-400"/>
                     </div>
-                    
                 </div>
             </div>
+
             <button
                 className="flex flex-row justify-center items-center px-8 py-2 gap-10 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 rounded-md"
                 style={{
@@ -97,8 +114,27 @@ function Signal() {
                 fsource={source || 'الكل'}
                 fdatefrom={selectedDateFrom}
                 fdateto={selectedDateTo}
-                nameSearch={nameSearch}/>
-
+                nameSearch={nameSearch}/> {isPopupVisible && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-white text-right p-8 rounded shadow">
+                        <h3 className="text-lg font-bold mb-4">تأكيد</h3>
+                        <p>هل أنت متأكد من مسح الاخطار
+                        </p>
+                        <div className="flex justify-end mt-4">
+                            <button
+                                className="bg-green-500 text-white py-2 px-4 rounded mr-2"
+                                onClick={togglePopup}>
+                                إلغاء
+                            </button>
+                            <button
+                                className="bg-red-500 text-white py-2 px-4 rounded"
+                                onClick={togglePopup}>
+                                مسح الاخطار
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
