@@ -26,7 +26,7 @@ import {
       
       <div class="space-y-4">
 
-      <div class="flex justify-between space-x-32 ml-16 mr-10 text-xs ">
+      <div class="flex justify-between space-x-32 ml-16 mr-8 text-xs ">
           <div className="ml-2">33</div>
           <div> لوزاني هبة</div>
           <div className="flex items-center ">عاجل
@@ -34,7 +34,7 @@ import {
           </div>
         </div>
       
-        <div class="flex justify-between space-x-32  ml-16 mr-10 text-xs">
+        <div class="flex justify-between space-x-32  ml-16 mr-8 text-xs">
           <div className="ml-2">27</div>
           <div> لوزاني هبة</div>
 
