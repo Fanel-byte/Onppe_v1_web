@@ -45,7 +45,7 @@ const CardView = () => {
       <div className="grid grid-cols-2">
       <div className="bg-[#FBFBFB] rounded-2xl m-1">
           <img src={icon_Traite} alt="Icon" className="h-10 w-10 ml-2 mt-2 mb-2" />
-          <h2 className="text-2xl font-semibold mb-2 text-green-500 font-montserrat text-center">
+          <h2 className="text-2xl font-semibold mb-2 text-green-500 font-montserrat text-center font-mons">
             اخطارات  معالجة
           </h2>
           <h2 className="text-2xl font-semibold  text-bg-gray-800 font-montserrat text-center mb-8">

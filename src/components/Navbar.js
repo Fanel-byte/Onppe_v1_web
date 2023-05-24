@@ -22,7 +22,7 @@ function Navbar() {
       </div>
 
       <div >
-         <p className="text-center  font-bold text-xs   lg:text-sm text-orange-400 ">الهيئة الوطنية لحماية وترقية الطفولة</p>
+         <p className="name text-center  font-bold text-xs   lg:text-sm text-orange-400 ">الهيئة الوطنية لحماية وترقية الطفولة</p>
       </div>
     
       <div className="flex-1">
