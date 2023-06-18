@@ -1,7 +1,7 @@
-import signalement from "./TabDB"
 import React, {useState} from 'react';
 import ReactPaginate from 'react-paginate';
 import {Icon} from '@iconify/react';
+import {signalement} from './TabDB';
 import deleteOutlineIcon from '@iconify-icons/material-symbols/delete-outline';
 import editOutlineSharp from '@iconify-icons/material-symbols/edit-outline-sharp';
 
@@ -14,6 +14,7 @@ function Table({
     fdateto,
     nameSearch
 }) {
+    console.log(signalement);
 
     const [selectedRows,
         setSelectedRows] = useState([]);
@@ -74,9 +75,7 @@ function Table({
 
     const filterByName = (signal) => {
         if (nameSearch) {
-            const lowerCaseName = signal
-                .name
-                .toLowerCase();
+            const lowerCaseName = signal.nom_ar+signal.prenom_ar
             const lowerCaseSearch = nameSearch.toLowerCase();
             return lowerCaseName.includes(lowerCaseSearch);
         }
@@ -95,13 +94,13 @@ function Table({
     // Obtenir les signalements de la page actuelle
     const offset = currentPage * itemsPerPage;
     const filteredSignals = signalement.filter((signal) => ((fstate !== 'الكل'
-        ? signal.state === fstate
+        ? signal.statut === fstate
         : true) && (ftype !== 'الكل'
-        ? signal.type === ftype
+        ? signal.designationar === ftype
         : true) && (fadress !== 'الكل'
-        ? signal.adress === fadress
+        ? signal.adresse === fadress
         : true) && (fsource !== 'الكل'
-        ? signal.source === fsource
+        ? signal.localisationsignalement === fsource
         : true) && (filterByDate
         ? filterByDate(signal)
         : true) && filterByName(signal)));
@@ -195,44 +194,44 @@ function Table({
                                     </div>
                                 </td>
                                 <td className="px-1 py-1 whitespace-nowrap text-right text-sm font-medium">
-                                    {signal.state !== 'معالج' && (
+                                    {signal.statut !== 'معالج' && (
                                         <button type="button" className="text-green-500 hover:text-green-600">
                                             <Icon icon={editOutlineSharp}/>
                                         </button>
                                     )}
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap">
-                                    {signal.state === 'معالج' && (
+                                    {signal.statut === 'معالج' && (
                                         <span
                                             className="px-2 inline-flex text-xs leading-5 font-semibold text-[#59C55E]">
-                                            {signal.state}
+                                            {signal.statut}
                                         </span>
                                     )}
-                                    {signal.state === 'قيد المعالجة' && (
+                                    {signal.statut === 'قيد المعالجة' && (
                                         <span
                                             className="px-2 inline-flex text-xs leading-5 font-semibold text-[#F28123]">
-                                            {signal.state}
+                                            {signal.statut}
                                         </span>
                                     )}
                                     {signal.state === 'غير معالج' && (
                                         <span
                                             className="px-2 inline-flex text-xs leading-5 font-semibold text-[#F50032]">
-                                            {signal.state}
+                                            {signal.statut}
                                         </span>
                                     )}
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
-                                        {signal.source}
+                                        {signal.localisationsignalement}
                                     </div>
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
-                                        {signal.adress}
+                                        {signal.adresse}
                                     </div>
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap">
-                                    <div className="text-sm text-gray-900">{signal.type}</div>
+                                    <div className="text-sm text-gray-900">{signal.designationar}</div>
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
@@ -244,7 +243,7 @@ function Table({
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
-                                        {signal.name}
+                                        {signal.nom_ar+" "+signal.prenom_ar}
                                     </div>
                                 </td>
                                 <td className="px-6 py-1 whitespace-nowrap text-right text-sm font-medium">
